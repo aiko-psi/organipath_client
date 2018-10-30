@@ -1,39 +1,67 @@
-import React, { Component } from 'react';
-import './App.css';
+import React from 'react';
 import 'typeface-roboto';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import axios from 'axios';
-import './././Providers/HttpProvider/HttpProvider.js'
+import {Task} from "../../../Model/task";
+import "./InputItem";
+import InputItem from "./InputItem";
 
-class ChangeTask extends Component {
+class ChangeTask extends React.Component {
 
     constructor (props) {
         super(props);
-        this.state = {
-            name : "",
-            notes: ""
-        };
+        this.state = {task: new Task()};
 
-        this.handleClick = this.handleClick.bind(this);
-        this.handleChange =this.handleChange.bind(this);
+        this.handleNotesChange = this.handleNotesChange.bind(this);
+        this.handleNameChange = this.handleNameChange.bind(this);
+
     }
 
-    handleChange(){
-        axios.get('http://localhost:8080/api/tasks/1')
-            .then(response => {
-                console.log(response);
-                this.setState({taskname: response.data.name})
+    componentDidMount(){
+        this.props.prov.getTask(1)
+            .then(task => {
+                console.log(task);
+                this.setState({task:task});
+                //this.settingState(task)
             })
     }
 
-    handleClick(){
-
+    update(){
+        this.props.prov.updateTask(this.state.task)
+            .catch((err) => {
+                // Error Message
+                this.componentDidMount();
+            });
     }
 
-    initialLoad(){
 
+    handleNameChange(newName){
+        this.setState({task:{...this.state.task, name:newName}});
+        this.update();
     }
 
+    handleNotesChange(newNotes){
+        this.setState({task:{...this.state.task, notes:newNotes}});
+        this.update();
+    }
 
+    render(){
+        return(
+            <div>
+                <h3>{this.state.task.id}</h3>
+                <InputItem
+                    label={"Name"}
+                    value={this.state.task.name}
+                    handleChange={this.handleNameChange}
+                />
+
+                <InputItem
+                    label={"Notizen"}
+                    value={this.state.task.notes}
+                    handleChange={this.handleNotesChange}
+                />
+            </div>
+        )
+    }
 }
+
+export default ChangeTask;
