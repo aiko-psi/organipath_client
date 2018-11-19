@@ -1,0 +1,7 @@
+.Sidebar{
+    flex-grow: 1;
+    border-color: darkgrey;
+    border-width: 2px;
+    border-style: solid;
+
+}

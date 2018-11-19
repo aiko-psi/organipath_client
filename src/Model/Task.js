@@ -1,11 +1,12 @@
 import {baseModel} from "./baseModel";
 
+
 export class Task extends baseModel{
     constructor(){
         super();
         this.id = 0;
-        this.name = undefined;
-        this.notes = undefined;
+        this.name ="";
+        this.notes = ""; // undefined: error in the textfield material ui animation
     }
 
     static fromJSON(data){

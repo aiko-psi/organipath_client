@@ -1,7 +1,7 @@
 import React from 'react';
 import 'typeface-roboto';
 import TextField from '@material-ui/core/TextField';
-import {Task} from "../../../Model/task";
+import {Task} from "../../../Model/Task";
 import "./InputItem";
 import InputItem from "./InputItem";
 
@@ -35,13 +35,11 @@ class ChangeTask extends React.Component {
 
 
     handleNameChange(newName){
-        this.setState({task:{...this.state.task, name:newName}});
-        this.update();
+        this.setState({task:{...this.state.task, name:newName}}, () => this.update());
     }
 
     handleNotesChange(newNotes){
-        this.setState({task:{...this.state.task, notes:newNotes}});
-        this.update();
+        this.setState({task:{...this.state.task, notes:newNotes}}, () => this.update());
     }
 
     render(){

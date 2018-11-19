@@ -1,8 +1,16 @@
 .App {
-  text-align: center;
+  display: flex;
+  height: 100%;
+}
+
+.site_container {
+  display: flex;
+
 }
 
 .button__container {
+  flex-grow: 5;
   margin-top: 200px;
   text-align: center;
+  width: auto;
 }

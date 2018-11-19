@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'typeface-roboto';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {HttpProvider} from "../Providers/HttpProvider/HttpProvider";
 import ChangeTask from  "./TaskContainer/ChangeTask/ChangeTask";
-import {Task} from "../Model/task";
+import {Task} from "../Model/Task";
+
+import Sidebar from "./Sidebar/Sidebar";
+import MenuAppBar from "./Sidebar/AppBar";
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#6a1b9a',
+        },
+        secondary: {
+            main: '#4527a0',
+        },
+    },
+});
 
 class App extends Component {
-    
 
     constructor () {
         super();
@@ -38,14 +52,20 @@ class App extends Component {
 
     render() {
         return (
-         <div className='button__container'>
-             <ChangeTask prov={this.state.httpProvider}/>
+            <MuiThemeProvider theme={theme}>
+                <MenuAppBar/>
+                <div className='site_container'>
+                    <Sidebar/>
+                    <div className='button__container'>
+                        <ChangeTask prov={this.state.httpProvider}/>
 
-             <Button variant="contained" color="primary" className='button' onClick={this.handleClick}>
-                 Get Taskname
-             </Button>
-             <p>{this.state.task.name}</p>
-        </div>
+                        <Button variant="contained" color="primary" className='button' onClick={this.handleClick}>
+                            Get Taskname
+                        </Button>
+                        <p>{this.state.task.name}</p>
+                    </div>
+                </div>
+            </MuiThemeProvider>
     );
   }
 }
