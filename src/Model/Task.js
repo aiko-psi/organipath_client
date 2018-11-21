@@ -11,7 +11,7 @@ export class Task extends baseModel{
 
     static fromJSON(data){
         let newTask = new Task();
-        newTask.id = data.id;
+        newTask.id = data.taskId;
         if (data.name) newTask.name = data.name;
         if (data.notes) newTask.notes = data.notes;
         return newTask;

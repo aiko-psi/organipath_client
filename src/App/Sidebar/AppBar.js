@@ -33,6 +33,7 @@ class MenuAppBar extends React.Component {
     state = {
         auth: true,
         anchorEl: null,
+        anchorElementMain: null
     };
 
     handleChange = event => {
@@ -43,29 +44,59 @@ class MenuAppBar extends React.Component {
         this.setState({ anchorEl: event.currentTarget });
     };
 
+    handleMainMenu = event => {
+        this.setState({ anchorElementMain: event.currentTarget });
+    };
+
     handleClose = () => {
         this.setState({ anchorEl: null });
     };
 
+    handleCloseMain = () => {
+        this.setState({ anchorElementMain: null });
+    };
+
     render() {
         const { classes } = this.props;
-        const { auth, anchorEl } = this.state;
-        const open = Boolean(anchorEl);
+        const { auth, anchorEl, anchorElementMain } = this.state;
 
         return (
             <div className={classes.root}>
                 <AppBar position="static">
                     <Toolbar>
-                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+                        <div>
+                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu"
+                                    aria-owns={anchorElementMain ? 'main-menu' : undefined}
+                                    aria-haspopup="true"
+                                    onClick={this.handleMainMenu}
+                                    color="inherit">
                             <MenuIcon />
                         </IconButton>
+                            <Menu
+                                id="main-menu"
+                                anchorEl={anchorElementMain}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElementMain)}
+                                onClose={this.handleCloseMain}
+                            >
+                                <MenuItem onClick={this.handleCloseMain}>Projektübersicht</MenuItem>
+                                <MenuItem onClick={this.handleCloseMain}>Einstellungen</MenuItem>
+                            </Menu>
+                        </div>
                         <Typography variant="h6" color="inherit" className={classes.grow}>
-                            Photos
+                            Organipath
                         </Typography>
                         {auth && (
                             <div>
                                 <IconButton
-                                    aria-owns={open ? 'menu-appbar' : undefined}
+                                    aria-owns={anchorEl ? 'menu-appbar' : undefined}
                                     aria-haspopup="true"
                                     onClick={this.handleMenu}
                                     color="inherit"
@@ -83,11 +114,11 @@ class MenuAppBar extends React.Component {
                                         vertical: 'top',
                                         horizontal: 'right',
                                     }}
-                                    open={open}
+                                    open={Boolean(anchorEl)}
                                     onClose={this.handleClose}
                                 >
-                                    <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                                    <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                                    <MenuItem onClick={this.handleClose}>Profil</MenuItem>
+                                    <MenuItem onClick={this.handleClose}>Logout</MenuItem>
                                 </Menu>
                             </div>
                         )}

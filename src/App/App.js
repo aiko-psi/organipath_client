@@ -5,6 +5,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {HttpProvider} from "../Providers/HttpProvider/HttpProvider";
 import ChangeTask from  "./TaskContainer/ChangeTask/ChangeTask";
+import ProjectOverview from "./ProjectOverview/ProjectOverview";
 import {Task} from "../Model/Task";
 
 import Sidebar from "./Sidebar/Sidebar";
@@ -42,11 +43,6 @@ class App extends Component {
     }
 
     componentDidMount(){
-        this.state.httpProvider.getTask(1)
-            .then(task => {
-                console.log(task);
-                this.setState({task: task})
-            });
 
     }
 
@@ -55,14 +51,8 @@ class App extends Component {
             <MuiThemeProvider theme={theme}>
                 <MenuAppBar/>
                 <div className='site_container'>
-                    <Sidebar/>
-                    <div className='button__container'>
-                        <ChangeTask prov={this.state.httpProvider}/>
-
-                        <Button variant="contained" color="primary" className='button' onClick={this.handleClick}>
-                            Get Taskname
-                        </Button>
-                        <p>{this.state.task.name}</p>
+                    <div className='centerpiece'>
+                        <ProjectOverview prov={this.state.httpProvider}/>
                     </div>
                 </div>
             </MuiThemeProvider>

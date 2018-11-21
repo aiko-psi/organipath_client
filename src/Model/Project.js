@@ -11,7 +11,7 @@ export class Project extends baseModel{
 
     static fromJSON(data){
         let newProject = new Project();
-        newProject.id = data.id;
+        newProject.id = data.projectId;
         if (data.name) newProject.name = data.name;
         if (data.privacy) newProject.privacy = data.privacy;
         return newProject;
