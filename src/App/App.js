@@ -3,10 +3,12 @@ import './App.css';
 import 'typeface-roboto';
 import {MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import ProjectOverview from "./ProjectOverview/ProjectOverview";
-import {Task} from "../Model/Task";
-
-import Sidebar from "./Sidebar/Sidebar";
 import MenuAppBar from "./Sidebar/AppBar";
+import {
+    Route,
+    withRouter,
+    Switch
+} from 'react-router-dom';
 
 const theme = createMuiTheme({
     palette: {
@@ -53,9 +55,24 @@ class App extends Component {
                             handleLogin={this.handleLogin}
                             handleLogout={this.handleLogout}/>
                 <div className='site_container'>
-                    <div className='centerpiece'>
-                        <ProjectOverview />
-                    </div>
+                    <Switch>
+                        <Route exact path="/"
+                               render={(props) =>
+                                   <div>Welcome!</div>
+                               }>
+                        </Route>
+                        <Route path="/projects"
+                               render={(props) =>
+                                   <ProjectOverview />
+                               }>
+                        </Route>
+                        <Route path="/login"
+                               render={(props) =>
+                                   <div>Login-Page</div>
+                               }>
+                        </Route>
+
+                    </Switch>
                 </div>
             </MuiThemeProvider>
     );

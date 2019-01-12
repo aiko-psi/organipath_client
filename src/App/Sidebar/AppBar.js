@@ -13,6 +13,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import {Button} from "@material-ui/core";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import browserHistory from "../../browserHistory";
 
 // From: https://material-ui.com/demos/app-bar/
 
@@ -69,6 +71,7 @@ class MenuAppBar extends React.Component {
     };
 
     loginRequest(){
+        browserHistory.push('/login');
 
     }
 
