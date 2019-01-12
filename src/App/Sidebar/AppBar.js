@@ -12,6 +12,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import {Button} from "@material-ui/core";
 
 // From: https://material-ui.com/demos/app-bar/
 
@@ -30,31 +31,47 @@ const styles = {
 };
 
 class MenuAppBar extends React.Component {
-    state = {
-        auth: true,
-        anchorEl: null,
-        anchorElementMain: null
-    };
+    constructor(){
+        super();
+        this.state = {
+            auth: true,
+            anchorElementUser: null,
+            anchorElementLogin: null,
+            anchorElementMain: null
+        };
 
-    handleChange = event => {
+        this.handleChange = this.handleChange.bind(this);
+        this.handleMenu = this.handleMenu.bind(this);
+        this.handleMainMenu = this.handleMainMenu.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.handleCloseMain = this.handleCloseMain.bind(this);
+
+    }
+
+    handleChange(event) {
         this.setState({ auth: event.target.checked });
     };
 
-    handleMenu = event => {
-        this.setState({ anchorEl: event.currentTarget });
+    handleMenu(event) {
+        this.setState({ anchorElementUser: event.currentTarget });
     };
 
-    handleMainMenu = event => {
+    handleMainMenu(event) {
         this.setState({ anchorElementMain: event.currentTarget });
     };
 
-    handleClose = () => {
-        this.setState({ anchorEl: null });
+    handleClose() {
+        this.setState({ anchorElementUser: null });
     };
 
-    handleCloseMain = () => {
+    handleCloseMain() {
         this.setState({ anchorElementMain: null });
     };
+
+    loginRequest(){
+
+    }
+
 
     render() {
         const { classes } = this.props;
@@ -93,10 +110,10 @@ class MenuAppBar extends React.Component {
                         <Typography variant="h6" color="inherit" className={classes.grow}>
                             Organipath
                         </Typography>
-                        {auth && (
+                        {this.props.loggedIn && (
                             <div>
                                 <IconButton
-                                    aria-owns={anchorEl ? 'menu-appbar' : undefined}
+                                    aria-owns={anchorEl ? 'menu-user' : undefined}
                                     aria-haspopup="true"
                                     onClick={this.handleMenu}
                                     color="inherit"
@@ -104,7 +121,7 @@ class MenuAppBar extends React.Component {
                                     <AccountCircle />
                                 </IconButton>
                                 <Menu
-                                    id="menu-appbar"
+                                    id="menu-user"
                                     anchorEl={anchorEl}
                                     anchorOrigin={{
                                         vertical: 'top',
@@ -121,6 +138,11 @@ class MenuAppBar extends React.Component {
                                     <MenuItem onClick={this.handleClose}>Logout</MenuItem>
                                 </Menu>
                             </div>
+                        )}
+                        {!this.props.loggedIn && (
+                            <Button color="inherit" onClick={this.loginRequest}>
+                                Login
+                            </Button>
                         )}
                     </Toolbar>
                 </AppBar>

@@ -21,8 +21,12 @@ class ProjectCard extends React.Component {
         super(props);
         this.state = { };
 
-        //this.handleNotesChange = this.handleNotesChange.bind(this);
+        this.clickCard = this.clickCard.bind(this);
 
+    }
+
+    clickCard(project){
+        console.log(this.props.project.id);
     }
 
 
@@ -31,7 +35,7 @@ class ProjectCard extends React.Component {
     render(){
         return(
             <Card className='card'>
-                <CardActionArea>
+                <CardActionArea onClick={this.clickCard}>
                     <CardMedia
                         component="img"
                         className='media'
@@ -48,12 +52,7 @@ class ProjectCard extends React.Component {
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button size="small" color="primary">
-                        Share
-                    </Button>
-                    <Button size="small" color="primary">
-                        Learn More
-                    </Button>
+
                 </CardActions>
             </Card>
         )

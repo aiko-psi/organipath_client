@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'typeface-roboto';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import {HttpProvider} from "../Providers/HttpProvider/HttpProvider";
-import ChangeTask from  "./TaskContainer/ChangeTask/ChangeTask";
+import {MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import ProjectOverview from "./ProjectOverview/ProjectOverview";
 import {Task} from "../Model/Task";
 
@@ -27,20 +24,22 @@ class App extends Component {
     constructor () {
         super();
         this.state = {
-            httpProvider: new HttpProvider(),
-            task: new Task(),
-            taskname : ""
+            currentUser: null,
+            loggedIn: false
         };
 
-        this.handleClick = this.handleClick.bind(this)
+        this.handleLogin = this.handleLogin.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
     }
 
-    handleClick(){
-        this.state.httpProvider.getTask(1).then(task => {
-            console.log(task);
-            this.setState({task: task});
-        })
+    handleLogin(user){
+        this.setState({currentUser:user, loggedIn: true})
     }
+
+    handleLogout(){
+        this.setState({currentUser:null, loggedIn:false});
+    }
+
 
     componentDidMount(){
 
@@ -49,10 +48,13 @@ class App extends Component {
     render() {
         return (
             <MuiThemeProvider theme={theme}>
-                <MenuAppBar/>
+                <MenuAppBar currentUser={this.state.currentUser}
+                            loggedIn={this.state.loggedIn}
+                            handleLogin={this.handleLogin}
+                            handleLogout={this.handleLogout}/>
                 <div className='site_container'>
                     <div className='centerpiece'>
-                        <ProjectOverview prov={this.state.httpProvider}/>
+                        <ProjectOverview />
                     </div>
                 </div>
             </MuiThemeProvider>
