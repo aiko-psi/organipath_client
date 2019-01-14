@@ -16,6 +16,7 @@ class ProjectOverview extends React.Component {
 
     componentDidMount(){
         getAllProjects().then(projectList =>{
+            console.log(projectList);
             this.setState({projectList: projectList})
         })
     }

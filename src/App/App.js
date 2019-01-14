@@ -4,6 +4,7 @@ import 'typeface-roboto';
 import {MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import ProjectOverview from "./ProjectOverview/ProjectOverview";
 import MenuAppBar from "./Sidebar/AppBar";
+import Login from "./Login/Login";
 import {
     Route,
     withRouter,
@@ -68,7 +69,7 @@ class App extends Component {
                         </Route>
                         <Route path="/login"
                                render={(props) =>
-                                   <div>Login-Page</div>
+                                   <Login />
                                }>
                         </Route>
 

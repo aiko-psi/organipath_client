@@ -14,7 +14,7 @@ const base = 'http://localhost:8080/api/';
 const sendRequest = (options) => {
     const headers = new Headers({
         'Content-Type': 'application/json',
-    })
+    });
 
     if(localStorage.getItem('access_token')) {
         headers.append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
