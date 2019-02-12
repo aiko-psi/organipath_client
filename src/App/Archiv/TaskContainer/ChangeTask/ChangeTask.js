@@ -1,7 +1,7 @@
 import React from 'react';
 import 'typeface-roboto';
 import TextField from '@material-ui/core/TextField';
-import {Task} from "../../../Model/Task";
+import {Task} from "../../../../Model/Task";
 import "./InputItem";
 import InputItem from "./InputItem";
 

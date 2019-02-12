@@ -143,7 +143,7 @@ class MenuAppBar extends React.Component {
                             </div>
                         )}
                         {!this.props.loggedIn && (
-                            <Button color="inherit" onClick={this.loginRequest}>
+                            <Button color="inherit" onClick={this.props.handleLogin}>
                                 Login
                             </Button>
                         )}

@@ -1,6 +1,6 @@
 import React from 'react';
 import 'typeface-roboto';
-import {Project} from "../../Model/Project";
+import {Project} from "../../../Model/Project";
 import './ProjectCard.css';
 
 import Card from '@material-ui/core/Card';
@@ -28,8 +28,6 @@ class ProjectCard extends React.Component {
     clickCard(project){
         console.log(this.props.project.id);
     }
-
-
 
 
     render(){

@@ -41,12 +41,16 @@ export function getAllProjects(){
     return sendRequest({
         url: base + "projects/",
         method: 'GET'
-    }).then(response => {
-            return response.data.content.map(project => {
-                return Project.fromJSON(project);
-            })
+    })
+        .then(response => {
+            return response.json();
         })
-        .catch(err => {throw new Error("getAllProjects went wrong. " + err.toString())})
+        .then(data => {
+            return data.map(proj => Project.fromJSON(proj));
+        })
+        .catch(err => {
+            throw new Error("Get all Projects not working!")
+        })
 }
 
 export function createProject(project){

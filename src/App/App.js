@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import 'typeface-roboto';
 import {MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import ProjectOverview from "./ProjectOverview/ProjectOverview";
+import ProjectOverview from "./Sites/ProjectOverview/ProjectOverview";
 import MenuAppBar from "./Sidebar/AppBar";
-import Login from "./Login/Login";
-import {
-    Route,
-    withRouter,
-    Switch
-} from 'react-router-dom';
+import Login from "./Components/Login/Login";
+import {Route, withRouter, Switch} from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import browserHistory from "../browserHistory";
 
 const theme = createMuiTheme({
     palette: {
@@ -17,7 +16,7 @@ const theme = createMuiTheme({
             main: '#6a1b9a',
         },
         secondary: {
-            main: '#4527a0',
+            main: '#7c4dff',
         },
     },
 });
@@ -36,7 +35,8 @@ class App extends Component {
     }
 
     handleLogin(user){
-        this.setState({currentUser:user, loggedIn: true})
+        browserHistory.push('/login');
+        this.setState({currentUser:user, loggedIn: true});
     }
 
     handleLogout(){
@@ -55,6 +55,7 @@ class App extends Component {
                             loggedIn={this.state.loggedIn}
                             handleLogin={this.handleLogin}
                             handleLogout={this.handleLogout}/>
+                <ToastContainer />
                 <div className='site_container'>
                     <Switch>
                         <Route exact path="/"

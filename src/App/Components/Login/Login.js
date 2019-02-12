@@ -4,6 +4,10 @@ import {signin} from "../../Providers/AuthProvider";
 import 'typeface-roboto';
 import TextField from '@material-ui/core/TextField';
 import "./Login.css";
+import {toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
+import browserHistory from "../../browserHistory";
 
 class Login extends React.Component {
 
@@ -11,6 +15,7 @@ class Login extends React.Component {
         super(props);
         this.state = {name: "", password: "", nameEmpty: false, pwEmpty: false};
         this.login = this.login.bind(this);
+        this.loginError = this.loginError.bind(this);
     }
 
     handleChange = name => event => {
@@ -21,7 +26,25 @@ class Login extends React.Component {
 
     login(){
         if(this.checkFill()){
-            signin(this.state.name, this.state.password);
+            signin(this.state.name, this.state.password)
+                .then((resp) => {
+                    browserHistory.push('/projects');
+                })
+                .catch((err) => {
+                    this.loginError(err);
+                })
+        }
+
+    }
+
+    loginError(error){
+        switch (error.status) {
+            case 401:
+                toast("Username oder Passwort");
+                break;
+            default:
+                toast("Undefinierter Fehler (Panik now)");
+
         }
 
     }

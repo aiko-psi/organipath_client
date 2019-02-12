@@ -12,6 +12,7 @@
     "react-router-config": "^4.4.0-beta.6",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.3",
+    "react-toastify": "^4.5.2",
     "typeface-roboto": "0.0.54"
   },
   "scripts": {
