@@ -1,9 +1,8 @@
 import React from 'react';
 import 'typeface-roboto';
 import './ProjectOverview.css';
-import {Project} from "../../Model/Project";
-import ProjectCard from "../Components/ProjectCard/ProjectCard";
-import {getAllProjects} from "../../Providers/HttpProvider";
+import ProjectCard from "../../Components/ProjectCard/ProjectCard";
+import {getAllProjects} from "../../../Providers/HttpProvider";
 
 class ProjectOverview extends React.Component {
 

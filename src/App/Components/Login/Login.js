@@ -1,13 +1,13 @@
 import React from "react";
 import Button from "@material-ui/core/es/Button/Button";
-import {signin} from "../../Providers/AuthProvider";
 import 'typeface-roboto';
 import TextField from '@material-ui/core/TextField';
 import "./Login.css";
 import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-toastify/dist/ReactToastify.css';
-import browserHistory from "../../browserHistory";
+import {signin} from "../../../Providers/AuthProvider";
+import browserHistory from "../../../browserHistory";
 
 class Login extends React.Component {
 

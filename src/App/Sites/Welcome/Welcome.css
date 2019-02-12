@@ -1,0 +1,35 @@
+.welcomeSite{
+    background: #f3e5f5;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.welcomeContent{
+    flex-grow: 1;
+    max-width: 60%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 2em;
+    font-size: 1.1em;
+    line-height: 1.5;
+    font-family: 'Roboto', sans-serif;
+}
+
+.welcomeMessage{
+    font-size: 4em;
+    font-style: normal;
+    font-weight: normal;
+    text-align: center;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2em;
+}

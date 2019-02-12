@@ -3,6 +3,7 @@ import './App.css';
 import 'typeface-roboto';
 import {MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import ProjectOverview from "./Sites/ProjectOverview/ProjectOverview";
+import Welcome from "./Sites/Welcome/Welcome";
 import MenuAppBar from "./Sidebar/AppBar";
 import Login from "./Components/Login/Login";
 import {Route, withRouter, Switch} from 'react-router-dom';
@@ -60,7 +61,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/"
                                render={(props) =>
-                                   <div>Welcome!</div>
+                                   <Welcome/>
                                }>
                         </Route>
                         <Route path="/projects"
