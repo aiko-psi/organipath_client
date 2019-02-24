@@ -2,12 +2,13 @@ import React from "react";
 import Button from "@material-ui/core/es/Button/Button";
 import 'typeface-roboto';
 import TextField from '@material-ui/core/TextField';
-import "./Login.css";
 import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-toastify/dist/ReactToastify.css';
 import {signin} from "../../../Providers/AuthProvider";
 import browserHistory from "../../../browserHistory";
+import loginStyles from './LoginStyles';
+import {withStyles} from "@material-ui/core";
 
 class Login extends React.Component {
 
@@ -28,7 +29,8 @@ class Login extends React.Component {
         if(this.checkFill()){
             signin(this.state.name, this.state.password)
                 .then((resp) => {
-                    browserHistory.push('/projects');
+                    this.props.handleUserDrawer();
+                    this.props.handleLogin({name: this.state.name});
                 })
                 .catch((err) => {
                     this.loginError(err);
@@ -51,11 +53,11 @@ class Login extends React.Component {
 
     checkFill(){
         let returnbool = true;
-        if( this.state.name.length == 0){
+        if( this.state.name.length === 0){
             this.setState({nameEmpty: true});
             returnbool = false;
         }
-        if(this.state.password.length == 0){
+        if(this.state.password.length === 0){
             this.setState({pwEmpty: false});
             returnbool = false;
         }
@@ -64,9 +66,10 @@ class Login extends React.Component {
 
 
     render(){
+        const {classes} = this.props;
 
         return (
-            <form noValidate className='loginContainer' autoComplete="off">
+            <form noValidate className={classes.loginContainer} autoComplete="off">
                 <TextField
                     error={this.state.nameEmpty}
                     id="usernameOrEmail"
@@ -92,6 +95,6 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default withStyles(loginStyles)(Login);
 
 

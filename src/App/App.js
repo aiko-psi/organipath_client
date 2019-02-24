@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
+import '../index.css';
 import 'typeface-roboto';
 import {MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import ProjectOverview from "./Sites/ProjectOverview/ProjectOverview";
 import Welcome from "./Sites/Welcome/Welcome";
-import MenuAppBar from "./Sidebar/AppBar";
+import TopBar from "./Sidebar/TopBar";
 import Login from "./Components/Login/Login";
 import {Route, withRouter, Switch} from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -12,6 +13,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import browserHistory from "../browserHistory";
 
 const theme = createMuiTheme({
+    typography: {
+        useNextVariants: true,
+    },
     palette: {
         primary: {
             main: '#6a1b9a',
@@ -27,8 +31,8 @@ class App extends Component {
     constructor () {
         super();
         this.state = {
-            currentUser: null,
-            loggedIn: false
+            currentUser: {name: ""},
+            authenticated: false
         };
 
         this.handleLogin = this.handleLogin.bind(this);
@@ -36,12 +40,12 @@ class App extends Component {
     }
 
     handleLogin(user){
-        browserHistory.push('/login');
-        this.setState({currentUser:user, loggedIn: true});
+        browserHistory.push('/projects');
+        this.setState({currentUser:user, authenticated: true});
     }
 
     handleLogout(){
-        this.setState({currentUser:null, loggedIn:false});
+        this.setState({currentUser:null, authenticated:false});
     }
 
 
@@ -52,10 +56,11 @@ class App extends Component {
     render() {
         return (
             <MuiThemeProvider theme={theme}>
-                <MenuAppBar currentUser={this.state.currentUser}
-                            loggedIn={this.state.loggedIn}
-                            handleLogin={this.handleLogin}
-                            handleLogout={this.handleLogout}/>
+                <TopBar
+                    currentUser={this.state.currentUser}
+                    authenticated={this.state.authenticated}
+                    handleLogin={this.handleLogin}
+                    handleLogout={this.handleLogout}/>
                 <ToastContainer />
                 <div className='site_container'>
                     <Switch>
