@@ -29,7 +29,7 @@ class UserDrawer extends React.Component{
                     paper: classes.drawerPaper
                 }}
             >
-                <div className='drawerHeader'>
+                <div className={classes.drawerHeader}>
                     <IconButton onClick={this.props.handleUserDrawer}>
                         <ExpandLess />
                     </IconButton>

@@ -2,8 +2,6 @@ export default {
     drawerPaper : {
         width: 240,
         top: 65,
-        left: 'auto',
-        right: 0,
         zIndex: 1000
     },
     drawerHeader: {

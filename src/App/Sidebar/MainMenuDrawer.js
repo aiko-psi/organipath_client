@@ -5,8 +5,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ExpandLess from '@material-ui/icons/ExpandLess';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import ViewWeek from '@material-ui/icons/ViewWeek';
+import Help from '@material-ui/icons/Help'
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import mainMenuDrawerStyles from './MainMenuDrawerStyles';
 
 class MainMenuDrawer extends React.Component{
@@ -19,37 +20,36 @@ class MainMenuDrawer extends React.Component{
 
 
     render(){
+        const {classes} = this.props;
 
         return(
             <Drawer
                 className='drawer'
                 variant="persistent"
-                anchor="top"
-                open={this.props.showMainMenuDrawer}
+                anchor="left"
+                open={Boolean(this.props.showMainMenuDrawer)}
                 classes={{
-                    paper: 'drawerPaper',
+                    paper: classes.drawerPaper
                 }}
             >
                 <div className='drawerHeader'>
                     <IconButton onClick={this.props.handleMainMenuDrawer}>
-                        <ExpandLess />
+                        <ChevronLeft/>
                     </IconButton>
                 </div>
                 <Divider />
                 <List>
                     <ListItem button >
-                        <ListItemIcon><MailIcon /></ListItemIcon>
-                        <ListItemText primary="Mail" />
+                        <ListItemIcon><ViewWeek/></ListItemIcon>
+                        <ListItemText primary="Projektübersicht" />
                     </ListItem>
                 </List>
                 <Divider />
                 <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
+                    <ListItem button >
+                        <ListItemIcon><Help/></ListItemIcon>
+                        <ListItemText primary="Hilfe" />
+                    </ListItem>
                 </List>
             </Drawer>
         )

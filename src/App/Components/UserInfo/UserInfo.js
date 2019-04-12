@@ -16,7 +16,7 @@ class UserInfo extends React.Component{
 
         return (
             <div className={classes.container}>
-                <List component="userInfo">
+                <List>
                     <ListItem button >
                         <ListItemIcon><Eject/></ListItemIcon>
                         <ListItemText primary="Logout" />

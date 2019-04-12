@@ -8,6 +8,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import settingsDrawerStyles from './SettingsDrawerStyles';
+import ChevronRight from '@material-ui/icons/ChevronRight';
 
 class SettingsDrawer extends React.Component{
 
@@ -24,15 +25,15 @@ class SettingsDrawer extends React.Component{
             <Drawer
                 className='drawer'
                 variant="persistent"
-                anchor="top"
-                open={Boolean(this.props.anchorEl)}
+                anchor="right"
+                open={Boolean(this.props.showSettingsDrawer)}
                 classes={{
                     paper: 'drawerPaper',
                 }}
             >
                 <div className='drawerHeader'>
-                    <IconButton onClick={this.props.handleDrawerClose}>
-                         <ExpandLess />
+                    <IconButton onClick={this.props.handleSettingsDrawer}>
+                         <ChevronRight/>
                     </IconButton>
                 </div>
                 <Divider />
