@@ -3,14 +3,17 @@ import './App.css';
 import '../index.css';
 import 'typeface-roboto';
 import {MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import ProjectOverview from "./Sites/ProjectOverview/ProjectOverview";
 import Welcome from "./Sites/Welcome/Welcome";
 import TopBar from "./TopBar/TopBar";
 import Login from "./Components/Login/Login";
-import {Route, withRouter, Switch} from 'react-router-dom';
+import {Switch} from 'react-router-dom';
+import {Redirect, Route} from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import browserHistory from "../browserHistory";
+import RedirectLogin from "./Sites/RedirectLogin/RedirectLogin";
+import ProjectOverview from "./Sites/ProjectOverview/ProjectOverview";
+import {PrivateRoute} from "../Providers/RouterProvider";
 
 const theme = createMuiTheme({
     typography: {
@@ -39,12 +42,14 @@ class App extends Component {
         this.handleLogout = this.handleLogout.bind(this);
     }
 
+
     handleLogin(user){
         browserHistory.push('/projects');
         this.setState({currentUser:user, authenticated: true});
     }
 
     handleLogout(){
+        browserHistory.push('/');
         this.setState({currentUser:null, authenticated:false});
     }
 
@@ -69,14 +74,13 @@ class App extends Component {
                                    <Welcome/>
                                }>
                         </Route>
-                        <Route path="/projects"
-                               render={(props) =>
-                                   <ProjectOverview />
-                               }>
-                        </Route>
+                        <PrivateRoute path="/projects"
+                                      component={ProjectOverview}
+                               >
+                        </PrivateRoute>
                         <Route path="/login"
                                render={(props) =>
-                                   <Login />
+                                   <RedirectLogin error={true}/>
                                }>
                         </Route>
 

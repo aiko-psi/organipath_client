@@ -43,6 +43,7 @@ class UserDrawer extends React.Component{
                 {this.props.authenticated &&
                 <UserInfo
                     currentUser = {this.props.currentUser}
+                    handleLogout={this.props.handleLogout}
                 />}
 
             </Drawer>

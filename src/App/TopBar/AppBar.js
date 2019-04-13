@@ -27,14 +27,17 @@ class MenuAppBar extends React.Component {
             <div className= 'root'>
                 <AppBar position="fixed">
                     <Toolbar>
-                        <div>
-                            <IconButton className='menuButton'
-                                        aria-label="Menu"
-                                        onClick={this.props.handleMainMenuDrawer}
-                                        color="inherit">
-                                <MenuIcon />
-                            </IconButton>
-                        </div>
+                        {this.props.authenticated && (
+                            <div>
+                                <IconButton className='menuButton'
+                                            aria-label="Menu"
+                                            onClick={this.props.handleMainMenuDrawer}
+                                            color="inherit">
+                                    <MenuIcon/>
+                                </IconButton>
+                            </div>
+                        )
+                        }
                         <Typography variant="h6" color="inherit" className={classes.grow}>
                             Organipath
                         </Typography>

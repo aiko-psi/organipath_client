@@ -9,6 +9,7 @@ import ViewWeek from '@material-ui/icons/ViewWeek';
 import Help from '@material-ui/icons/Help'
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import mainMenuDrawerStyles from './MainMenuDrawerStyles';
+import { Link } from 'react-router-dom';
 
 class MainMenuDrawer extends React.Component{
 
@@ -39,7 +40,7 @@ class MainMenuDrawer extends React.Component{
                 </div>
                 <Divider />
                 <List>
-                    <ListItem button >
+                    <ListItem button component={Link} to="/projects">
                         <ListItemIcon><ViewWeek/></ListItemIcon>
                         <ListItemText primary="Projektübersicht" />
                     </ListItem>

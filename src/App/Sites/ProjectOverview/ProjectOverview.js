@@ -9,7 +9,6 @@ class ProjectOverview extends React.Component {
     constructor (props) {
         super(props);
         this.state = {projectList: new Array()};
-        //this.handleNotesChange = this.handleNotesChange.bind(this);
 
     }
 
@@ -22,7 +21,6 @@ class ProjectOverview extends React.Component {
 
     render(){
         const projects = this.state.projectList.map(project => {
-            console.log(project);
             return <ProjectCard
                 project = {project}
                 key={project.id.toString()}

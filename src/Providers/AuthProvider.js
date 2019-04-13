@@ -25,6 +25,11 @@ export function signin(usernameOrEmail, password) {
     })
 }
 
+export function logout() {
+    return localStorage.removeItem('access_token')
+
+}
+
 export function signup(user, voucher){
     // TODO: Fail
     let voucherObj = {voucher: voucher};

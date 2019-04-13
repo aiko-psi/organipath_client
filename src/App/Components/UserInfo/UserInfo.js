@@ -4,10 +4,17 @@ import Eject from '@material-ui/icons/Eject';
 import Person from '@material-ui/icons/Person';
 import userInfoStyles from './UserInfoStyles';
 import UserDrawer from "../UserDrawer/UserDrawer";
+import {logout} from "../../../Providers/AuthProvider";
 
 class UserInfo extends React.Component{
     constructor(props){
         super(props);
+        this.logout = this.logout.bind(this);
+    }
+
+    logout(){
+        logout();
+        this.props.handleLogout();
     }
 
     render(){
@@ -17,7 +24,7 @@ class UserInfo extends React.Component{
         return (
             <div className={classes.container}>
                 <List>
-                    <ListItem button >
+                    <ListItem button onClick={this.logout}>
                         <ListItemIcon><Eject/></ListItemIcon>
                         <ListItemText primary="Logout" />
                     </ListItem>
