@@ -1,10 +1,10 @@
 import React from 'react';
 import {Divider, Drawer, IconButton, withStyles} from "@material-ui/core";
 import ExpandLess from '@material-ui/icons/ExpandLess';
-import Login from "../Components/Login/Login";
+import Login from "../Login/Login";
 import userDrawerStyles from './UserDrawerStyles';
-import TopBar from "../App";
-import UserInfo from "../Components/UserInfo/UserInfo";
+import TopBar from "../../App";
+import UserInfo from "../UserInfo/UserInfo";
 
 
 class UserDrawer extends React.Component{

@@ -1,8 +1,8 @@
 import React from 'react';
 import AppBar from "./AppBar";
-import UserDrawer from "./UserDrawer";
-import MainMenuDrawer from "./MainMenuDrawer";
-import SettingsDrawer from "./SettingsDrawer";
+import UserDrawer from "../Components/UserDrawer/UserDrawer";
+import MainMenuDrawer from "../Components/MainMenuDrawer/MainMenuDrawer";
+import SettingsDrawer from "../Components/SettingsDrawer/SettingsDrawer";
 
 
 class TopBar extends React.Component{

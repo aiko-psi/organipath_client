@@ -3,7 +3,7 @@ import {Divider, List, ListItem, ListItemIcon, ListItemText, withStyles} from "@
 import Eject from '@material-ui/icons/Eject';
 import Person from '@material-ui/icons/Person';
 import userInfoStyles from './UserInfoStyles';
-import UserDrawer from "../../Sidebar/UserDrawer";
+import UserDrawer from "../UserDrawer/UserDrawer";
 
 class UserInfo extends React.Component{
     constructor(props){

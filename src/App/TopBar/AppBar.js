@@ -9,7 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import {Button} from "@material-ui/core";
 import browserHistory from "../../browserHistory";
-import UserDrawer from "./UserDrawer";
+import UserDrawer from "../Components/UserDrawer/UserDrawer";
 import appBarStyles from './AppBarStyles';
 
 // From: https://material-ui.com/demos/app-bar/
@@ -38,6 +38,7 @@ class MenuAppBar extends React.Component {
                         <Typography variant="h6" color="inherit" className={classes.grow}>
                             Organipath
                         </Typography>
+                        {/* if authenticated, show button for standard userDrawer */}
                         {this.props.authenticated && (
                             <div>
                                 <IconButton
@@ -48,6 +49,7 @@ class MenuAppBar extends React.Component {
                                 </IconButton>
                             </div>
                         )}
+                        {/* if not authenticated, show Login button */}
                         {!this.props.authenticated && (
                             <div>
                             <Button

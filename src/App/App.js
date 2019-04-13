@@ -5,7 +5,7 @@ import 'typeface-roboto';
 import {MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import ProjectOverview from "./Sites/ProjectOverview/ProjectOverview";
 import Welcome from "./Sites/Welcome/Welcome";
-import TopBar from "./Sidebar/TopBar";
+import TopBar from "./TopBar/TopBar";
 import Login from "./Components/Login/Login";
 import {Route, withRouter, Switch} from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';

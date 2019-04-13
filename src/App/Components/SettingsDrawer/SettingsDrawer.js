@@ -1,9 +1,9 @@
 import React from 'react';
 import {Divider, Drawer, IconButton, withStyles} from "@material-ui/core";
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import List from '@material-ui/core/List/index';
+import ListItem from '@material-ui/core/ListItem/index';
+import ListItemIcon from '@material-ui/core/ListItemIcon/index';
+import ListItemText from '@material-ui/core/ListItemText/index';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
