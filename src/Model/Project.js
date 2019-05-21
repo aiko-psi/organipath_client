@@ -6,7 +6,7 @@ export class Project extends baseModel{
         super();
         this.id = 0;
         this.name ="";
-        this.privacy = true; // undefined: error in the textfield material ui animation
+        this.privacy = false; // undefined: error in the textfield material ui animation
     }
 
     static fromJSON(data){

@@ -27,6 +27,7 @@ class TopBar extends React.Component{
     }
 
     handleMainMenuDrawer(){
+        this.props.handleDrawer("left", !this.state.showMainMenuDrawer)
         this.setState((state) => ({showMainMenuDrawer: !state.showMainMenuDrawer}))
     }
 

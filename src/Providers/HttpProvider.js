@@ -13,19 +13,20 @@ const base = 'http://localhost:8080/api/';
 
 const sendRequest = (options) => {
     const headers = new Headers({
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json" ,
     });
 
     if(localStorage.getItem('access_token')) {
         headers.append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
     }
 
-    const defaults = {headers: headers};
-    options = Object.assign({}, defaults, options);
+    //const defaults = {headers: headers};
+    //options = Object.assign({}, defaults, options);
+    options = {...options, headers};
 
     return fetch(options.url, options);
 
-}
+};
 
 
 //Projects
@@ -57,7 +58,7 @@ export function createProject(project){
     return sendRequest({
         url: base + "projects/",
         method: 'POST',
-        boby: JSON.stringify(project)
+        body: JSON.stringify(project)
     }).catch(err => {throw new Error("createProjects went wrong. " + err.toString())})
 }
 

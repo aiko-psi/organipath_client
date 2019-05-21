@@ -15,7 +15,7 @@ class RedirectLogin extends React.Component{
     }
 
     showLoginError(){
-        toast.error("Keine Berechtigung!", {
+        toast.error("Keine Berechtigung!" + this.props.stringi.stringi, {
             position: toast.POSITION.TOP_LEFT
         });
 

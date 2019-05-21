@@ -39,3 +39,12 @@ export function signup(user, voucher){
     return fetch(address, options);
 
 }
+
+export function checkLoggedIn(){
+    let access = localStorage.getItem('access_token');
+    if (access){
+        return Promise.resolve(access);
+    } else {
+        return Promise.reject();
+    }
+}

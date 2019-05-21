@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
 import '../index.css';
 import 'typeface-roboto';
+import {withStyles} from "@material-ui/core/es";
 import {MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Welcome from "./Sites/Welcome/Welcome";
 import TopBar from "./TopBar/TopBar";
@@ -14,6 +14,9 @@ import browserHistory from "../browserHistory";
 import RedirectLogin from "./Sites/RedirectLogin/RedirectLogin";
 import ProjectOverview from "./Sites/ProjectOverview/ProjectOverview";
 import {PrivateRoute} from "../Providers/RouterProvider";
+import classNames from 'classnames';
+import AppStyle from "./AppStyle";
+import {checkLoggedIn} from "../Providers/AuthProvider";
 
 const theme = createMuiTheme({
     typography: {
@@ -35,11 +38,14 @@ class App extends Component {
         super();
         this.state = {
             currentUser: {name: ""},
-            authenticated: false
+            authenticated: false,
+            leftDrawerOpen: false,
+            rightDrawerOpen: false
         };
 
         this.handleLogin = this.handleLogin.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
+        this.handleDrawer = this.handleDrawer.bind(this);
     }
 
 
@@ -53,21 +59,53 @@ class App extends Component {
         this.setState({currentUser:null, authenticated:false});
     }
 
+    handleDrawer(side, value){
+        switch (side) {
+            case "left": {
+                this.setState({leftDrawerOpen: value});
+                break;
+            }
+            case "right": {
+                this.setState({rightDrawerOpen: value});
+                break;
+            }
+            default: {
+                throw new Error("Funktion falsch genutzt") //ToDO is this usefull?
+            }
+
+
+        }
+    }
+
 
     componentDidMount(){
+        checkLoggedIn()
+            .then(access => {
+                this.handleLogin("user") //TODO: Dummy!!!
+            })
+            .catch(() => {
+                //dunno?
+            })
 
     }
 
+
+
+
     render() {
+        const { classes } = this.props;
+
         return (
             <MuiThemeProvider theme={theme}>
                 <TopBar
                     currentUser={this.state.currentUser}
                     authenticated={this.state.authenticated}
                     handleLogin={this.handleLogin}
-                    handleLogout={this.handleLogout}/>
+                    handleLogout={this.handleLogout}
+                    handleDrawer={this.handleDrawer}/>
                 <ToastContainer />
-                <div className='site_container'>
+                <div className= {classNames(classes.site_container,
+                    {[classes.site_container_small] : this.state.leftDrawerOpen} )}>
                     <Switch>
                         <Route exact path="/"
                                render={(props) =>
@@ -78,9 +116,9 @@ class App extends Component {
                                       component={ProjectOverview}
                                >
                         </PrivateRoute>
-                        <Route path="/login"
-                               render={(props) =>
-                                   <RedirectLogin error={true}/>
+                        <Route path="/login/:stringi"
+                               render={({match}) =>
+                                   <RedirectLogin error={true} stringi={match.params}/>
                                }>
                         </Route>
 
@@ -91,4 +129,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withStyles(AppStyle)(App);
