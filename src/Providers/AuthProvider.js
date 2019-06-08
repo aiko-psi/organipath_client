@@ -1,4 +1,6 @@
 import React from 'react';
+import {getAllProjects, getUser} from "./HttpProvider";
+import {User} from "../Model/User";
 
 const base = "http://localhost:8080/api/auth/";
 
@@ -20,13 +22,15 @@ export function signin(usernameOrEmail, password) {
         })
     ).then(resp => {
         localStorage.setItem('access_token', resp.accessToken);
-        return resp;
-
+        let user = User.fromJSON(resp.currentUser);
+        return user;
     })
 }
 
 export function logout() {
+    localStorage.removeItem('username');
     return localStorage.removeItem('access_token')
+
 
 }
 
@@ -43,7 +47,10 @@ export function signup(user, voucher){
 export function checkLoggedIn(){
     let access = localStorage.getItem('access_token');
     if (access){
-        return Promise.resolve(access);
+        // check if the access token is working, therefore making a request
+        return getUser().then((user) => {
+            return user;
+        });
     } else {
         return Promise.reject();
     }

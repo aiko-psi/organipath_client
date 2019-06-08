@@ -30,7 +30,7 @@ class Login extends React.Component {
             signin(this.state.name, this.state.password)
                 .then((resp) => {
                     this.props.handleUserDrawer();
-                    this.props.handleLogin({name: this.state.name});
+                    this.props.handleLogin(resp);
                 })
                 .catch((err) => {
                     this.loginError(err);
@@ -42,7 +42,7 @@ class Login extends React.Component {
     loginError(error){
         switch (error.status) {
             case 401:
-                toast("Username oder Passwort");
+                toast("Username oder Passwort falsch");
                 break;
             default:
                 toast("Undefinierter Fehler (Panik now)");

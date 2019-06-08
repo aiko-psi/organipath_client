@@ -11,5 +11,14 @@ export class User extends baseModel{
         this.password="";
     }
 
+    static fromJSON(data){
+        let newUser = new User();
+        newUser.id = data.id;
+        newUser.name = data.name;
+        newUser.username = data.username;
+        newUser.email = data.email;
+        return newUser;
+    }
+
 
 }

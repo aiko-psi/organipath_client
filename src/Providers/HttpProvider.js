@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import {Task} from "../Model/Task";
 import {Project} from "../Model/Project";
+import {User} from "../Model/User";
 
 // Inspiration from Callicoder
 // https://github.com/callicoder/spring-security-react-ant-design-polls-app/blob/master/polling-app-client/src/util/APIUtils.js
@@ -32,9 +33,19 @@ const sendRequest = (options) => {
 //Projects
 
 export function getProject(projectId){
-    return axios.get(this.base + "projects/" + projectId.toString())
-        .then(response => Project.fromJSON((response.data)))
-        .catch(err => {throw new Error("getProject went wrong. " + err.toString())})
+    return sendRequest({
+        url: base + "projects/" + projectId.toString(),
+        method: 'GET'
+    })
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            return Project.fromJSON((data));
+        })
+        .catch(err => {
+            throw new Error("Get Project went wrong!")
+        });
 }
 
 
@@ -129,4 +140,19 @@ export function deleteTask(projectId, taskId){
         url: address,
         method: 'DELETE'
     })
+
+}
+
+
+export function getUser() {
+    return sendRequest({
+        url: base + "user/",
+        method: 'GET'
+    }).then(resp => {
+        // important: get from readable stream with async .json func
+        return resp.json();
+    }).then(resp => {
+        return User.fromJSON(resp)
+    })
+
 }

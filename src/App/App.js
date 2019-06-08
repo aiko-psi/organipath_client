@@ -51,7 +51,7 @@ class App extends Component {
 
     handleLogin(user){
         browserHistory.push('/projects');
-        this.setState({currentUser:user, authenticated: true});
+        this.setState({currentUser:user, authenticated:true});
     }
 
     handleLogout(){
@@ -80,11 +80,11 @@ class App extends Component {
 
     componentDidMount(){
         checkLoggedIn()
-            .then(access => {
-                this.handleLogin("user") //TODO: Dummy!!!
+            .then(user => {
+                this.handleLogin(user);
             })
             .catch(() => {
-                //dunno?
+                this.handleLogout();
             })
 
     }
