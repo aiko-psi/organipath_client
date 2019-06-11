@@ -12,6 +12,8 @@ import {List, Create, ScatterPlot} from '@material-ui/icons';
 import Typography from '@material-ui/core/Typography';
 
 import '../project.svg';
+import browserHistory from "../../../browserHistory";
+import {generatePath} from "react-router";
 
 
 class ProjectCard extends React.Component {
@@ -26,6 +28,7 @@ class ProjectCard extends React.Component {
 
     clickCard(project){
         console.log(this.props.project.id);
+        browserHistory.push(generatePath("/project/:projectid/", { projectid: this.props.project.id}));
     }
 
 

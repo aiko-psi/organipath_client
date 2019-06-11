@@ -74,7 +74,7 @@ export function createProject(project){
 }
 
 export function updateProject(project){
-    let address = this.base + "projects/" + project.id.toString();
+    let address = base + "projects/" + project.id.toString();
     return sendRequest({
         url: address,
         method: 'PUT',
@@ -93,40 +93,51 @@ export function deleteProject(projectId){
 // Tasks
 
 export function getTask(projectId, taskId) {
-    let address = this.base + "projects/" + projectId.toString() + "/tasks/" + taskId.toString();
+    let address = base + "projects/" + projectId.toString() + "/tasks/" + taskId.toString();
     return sendRequest({
         url: address,
         method: 'GET'
-    }).then(response => Task.fromJSON(response.data))
+    }).then(response => {
+        return response.json();
+    }).then(response => {
+        return Task.fromJSON(response.data)
+    })
         .catch(err => {
             throw new Error("getTask went wrong. " + err.toString())
         });
 }
 
 export function getAllTasks(projectId){
-    let address = this.base + "projects/" + projectId.toString() + "/tasks";
+    let address = base + "projects/" + projectId.toString() + "/tasks";
     return sendRequest({
         url: address,
         method: 'GET'
     }).then(response => {
-            return response.data.content.map(task => {
+        return response.json();
+    }).then(response => {
+            return response.map(task => {
                 return Task.fromJSON(task);
             })
         })
 }
 
 export function createTask(projectId,task){
-    let address = this.base + "projects/" + projectId.toString() + "/tasks";
+    let address = base + "projects/" + projectId.toString() + "/tasks";
     return sendRequest({
         url: address,
         method: 'POST',
         body: JSON.stringify(task)
-    }).catch(err => {throw new Error("createTask went wrong. " + err.toString())})
+    }).then(response => {
+        return response.json();
+    }).then(response => {
+        return Task.fromJSON(response)
+    })
+        .catch(err => {throw new Error("createTask went wrong. " + err.toString())})
 }
 
 
 export function updateTask(projectId, task){
-    let address = this.base + "projects/" + projectId.toString() +  "/tasks/" + task.id.toString();
+    let address = base + "projects/" + projectId.toString() +  "/tasks/" + task.id.toString();
     return sendRequest({
         url: address,
         method: 'PUT',
@@ -135,7 +146,7 @@ export function updateTask(projectId, task){
 }
 
 export function deleteTask(projectId, taskId){
-    let address = this.base + "projects/" + projectId.toString() + "/tasks" + taskId.toString();
+    let address = base + "projects/" + projectId.toString() + "/tasks" + taskId.toString();
     return sendRequest({
         url: address,
         method: 'DELETE'

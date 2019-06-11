@@ -10,7 +10,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={(props) =>
         localStorage.getItem('access_token') ?
             (<Component {...props} />)
-            : (<Redirect to= {generatePath("/login/:stringi", { stringi: "helloo"})} />)
+            : (<Redirect to="/login" />)
     } />
 );
 

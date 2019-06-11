@@ -17,6 +17,8 @@ import {PrivateRoute} from "../Providers/RouterProvider";
 import classNames from 'classnames';
 import AppStyle from "./AppStyle";
 import {checkLoggedIn} from "../Providers/AuthProvider";
+import ChangeTask from "./Archiv/TaskContainer/ChangeTask/ChangeTask";
+import ProjectTaskList from "./Sites/ProjectTaskList/ProjectTaskList";
 
 const theme = createMuiTheme({
     typography: {
@@ -116,9 +118,19 @@ class App extends Component {
                                       component={ProjectOverview}
                                >
                         </PrivateRoute>
-                        <Route path="/login/:stringi"
+                        <Route path="/login"
+                               render={(props) =>
+                                   <RedirectLogin error={true}/>
+                               }>
+                        </Route>
+                        <Route path="/project/:projectid"
                                render={({match}) =>
-                                   <RedirectLogin error={true} stringi={match.params}/>
+                                   <ProjectTaskList projectid={match.params.projectid}/>
+                               }>
+                        </Route>
+                        <Route path="/task/:taskid"
+                               render={({match}) =>
+                                   <ChangeTask taskid={match.params}/>
                                }>
                         </Route>
 
