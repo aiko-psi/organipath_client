@@ -1,11 +1,13 @@
 import React from 'react';
 import 'typeface-roboto';
-import './ProjectOverview.css';
 import ProjectCard from "../../Components/ProjectCard/ProjectCard";
 import {getAllProjects} from "../../../Providers/HttpProvider";
 import NewProjectDialog from "../../Components/NewProjectDialog/NewProjectDialog";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import {withStyles} from "@material-ui/core";
+import projectCardStyle from "../../Components/ProjectCard/ProjectCardStyles";
+import ProjectOverviewStyles from "./ProjectOverviewStyles";
 
 class ProjectOverview extends React.Component {
 
@@ -33,6 +35,7 @@ class ProjectOverview extends React.Component {
     }
 
     render(){
+        const {classes} = this.props;
         const projects = this.state.projectList.map(project => {
             return <ProjectCard
                 project = {project}
@@ -42,14 +45,15 @@ class ProjectOverview extends React.Component {
 
         return(
             <div>
-                <div className='projectOverview'>
+                <div className={classes.projectOverview}>
                     {projects}
                 </div>
                 <NewProjectDialog
                     openNewProjectDialog={this.state.openNewProjectDialog}
                     handleProjDialogClose={this.handleProjDialogClose}
                  />
-                <Fab color="primary" aria-label="Add" onClick={this.handleProjDialogOpen}>
+                <Fab color="primary" aria-label="Add" onClick={this.handleProjDialogOpen}
+                     className={classes.fab} size="large">
                     <AddIcon />
                 </Fab>
             </div>
@@ -57,4 +61,4 @@ class ProjectOverview extends React.Component {
     }
 }
 
-export default ProjectOverview;
+export default withStyles(ProjectOverviewStyles)(ProjectOverview);

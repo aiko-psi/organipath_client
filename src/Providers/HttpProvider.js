@@ -100,7 +100,7 @@ export function getTask(projectId, taskId) {
     }).then(response => {
         return response.json();
     }).then(response => {
-        return Task.fromJSON(response.data)
+        return Task.fromJSON(response)
     })
         .catch(err => {
             throw new Error("getTask went wrong. " + err.toString())
@@ -146,7 +146,7 @@ export function updateTask(projectId, task){
 }
 
 export function deleteTask(projectId, taskId){
-    let address = base + "projects/" + projectId.toString() + "/tasks" + taskId.toString();
+    let address = base + "projects/" + projectId.toString() + "/tasks/" + taskId.toString();
     return sendRequest({
         url: address,
         method: 'DELETE'

@@ -2,11 +2,13 @@ import React from "react";
 import {createTask, getAllTasks, getProject, getTask} from "../../../Providers/HttpProvider";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from '@material-ui/icons/Add';
-import {List, ListItem, ListItemIcon, ListItemText, withStyles} from "@material-ui/core";
-import DraftsIcon from '@material-ui/icons/Drafts';
+import {List, ListSubheader, withStyles} from "@material-ui/core";
 import {Project} from "../../../Model/Project";
 import ProjectTaskListStyles from "./ProjectTaskListStyles";
 import {Task} from "../../../Model/Task";
+import TaskListItem from "../../Components/TaskListItem/TaskListItem";
+import browserHistory from "../../../browserHistory";
+import {generatePath} from "react-router";
 
 class ProjectTaskList extends React.Component{
     constructor(props) {
@@ -28,30 +30,28 @@ class ProjectTaskList extends React.Component{
         createTask(this.state.project.id, new Task("default name", this.state.project.id, 0)).then((newTask)=> {
             let newTaskList = this.state.taskList;
             newTaskList.push(newTask);
-            this.setState({taskList: newTaskList})
+            this.setState({taskList: newTaskList});
+            browserHistory.push(generatePath(generatePath("/project/:projectid/task/change/:taskid/",
+                { projectid: this.state.project.id, taskid: newTask.id})))
         });
     }
 
     render(){
         const {classes} = this.props;
-        const tasks = this.state.taskList.map(task => {
-            let name = task.name;
-            return <ListItem key={task.id} button>
-                <ListItemIcon>
-                    <DraftsIcon />
-                </ListItemIcon>
-                <ListItemText primary={name}/>
-            </ListItem>
-        });
+        const tasks = this.state.taskList.map(task =>
+            <TaskListItem task={task} projectid={this.state.project.id} key={task.id}>
+            </TaskListItem>
+        );
 
         return(
-            <div>
+            <div className={classes.taskList}>
                 <h2>Projekt: {this.state.project.name}</h2>
                 {this.state.taskList.length == 0 &&
                 <p>Noch keine Aufgaben vorhanden!</p>}
                 <List
                     component="nav"
                     aria-labelledby="nested-list-subheader"
+                    subheader={<ListSubheader>Aufgaben</ListSubheader>}
                     className={classes.list}
                 >
                     {tasks}

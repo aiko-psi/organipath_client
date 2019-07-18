@@ -1,8 +1,8 @@
 export default {
     card: {
         flexGrow: 1,
-        margin: 15,
-        maxWidth: 300
+        margin: 20,
+        maxWidth: 200
     },
     avatar: {
         width: 150,

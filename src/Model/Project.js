@@ -4,7 +4,6 @@ import {baseModel} from "./baseModel";
 export class Project extends baseModel{
     constructor(){
         super();
-        this.id = 0;
         this.name ="";
         this.privacy = false; // undefined: error in the textfield material ui animation
     }

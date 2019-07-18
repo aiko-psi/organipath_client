@@ -28,7 +28,7 @@ class ProjectCard extends React.Component {
 
     clickCard(project){
         console.log(this.props.project.id);
-        browserHistory.push(generatePath("/project/:projectid/", { projectid: this.props.project.id}));
+        browserHistory.push(generatePath("/project/showlist/:projectid/", { projectid: this.props.project.id}));
     }
 
 
